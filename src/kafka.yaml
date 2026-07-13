@@ -127,6 +127,7 @@ spec:
   volumeClaimTemplates:
     - metadata:
         name: kafka-data
+        namespace: default
       spec:
         accessModes:
           - ReadWriteOnce
