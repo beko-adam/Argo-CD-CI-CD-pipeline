@@ -85,6 +85,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: pgbouncer
+  namespace: default
 spec:
   replicas: 2
   selector:
