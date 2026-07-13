@@ -1,0 +1,30 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: django
+  template:
+    metadata:
+      labels:
+        app: django
+    spec:
+      containers:
+        - name: django
+          image: abubakeradam/motor-monitoring:v1
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              python manage.py migrate &&
+              daphne -b 0.0.0.0 -p 8000 project.asgi:application
+          ports:
+            - containerPort: 8000
+          envFrom:
+            - configMapRef:
+                name: django-config
+            # - secretRef:
+            #     name: django-secret
