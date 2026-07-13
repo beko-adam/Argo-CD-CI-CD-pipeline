@@ -1,0 +1,57 @@
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: celery
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: celery
+#   template:
+#     metadata:
+#       labels:
+#         app: celery
+#     spec:
+#       containers:
+#         - name: celery
+#           image: abubakeradam/motor-chat:v8.2
+#           command: ["celery", "--app=project", "worker", "-l", "INFO"]
+        
+
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: celery
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: celery
+  template:
+    metadata:
+      labels:
+        app: celery
+    spec:
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app: celery
+      containers:
+        - name: celery
+          image: abubakeradam/motor-chat:v8.8
+          command: ["celery", "--app=project", "worker", "-l", "INFO"]
+          envFrom:
+            - configMapRef:
+                name: django-config
+          resources:
+            requests:
+              cpu: "200m"
+              memory: "256Mi"
+            limits:
+              cpu: "700m"
+              memory: "768Mi"

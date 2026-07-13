@@ -1,0 +1,25 @@
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: nginx
+# spec:
+#   type: NodePort   # LoadBalancer on AWS
+#   selector:
+#     app: nginx
+#   ports:
+#     - port: 80
+#       targetPort: 80
+#       nodePort: 30080
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+spec:
+  type: ClusterIP  # LoadBalancer on AWS
+  selector:
+    app: nginx
+  ports:
+    - port: 80
+      targetPort: 80
