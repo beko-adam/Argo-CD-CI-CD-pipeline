@@ -11,7 +11,7 @@ spec:
   source:
     repoURL: https://github.com/antonputra/lesson-158.git
     targetRevision: HEAD
-    path: environments/staging/django
+    path: src/environments/staging/django
   destination:
     server: https://kubernetes.default.svc
   syncPolicy:
