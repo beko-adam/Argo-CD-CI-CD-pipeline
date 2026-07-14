@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: second-app-bar
+  name: Nginx App
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -11,7 +11,7 @@ spec:
   source:
     repoURL:  https://github.com/beko-adam/Argo-CD-CI-CD-pipeline.git
     targetRevision: HEAD
-    path: sec/environments/staging/nginx
+    path: sec/environments/staging/nginx-app
   destination:
     server: https://kubernetes.default.svc
   syncPolicy:

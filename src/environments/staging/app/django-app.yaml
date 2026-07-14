@@ -11,7 +11,7 @@ spec:
   source:
     repoURL:  https://github.com/beko-adam/Argo-CD-CI-CD-pipeline.git
     targetRevision: HEAD
-    path: src/environments/staging/django
+    path: src/environments/staging/django-app
   destination:
     server: https://kubernetes.default.svc
   syncPolicy:
